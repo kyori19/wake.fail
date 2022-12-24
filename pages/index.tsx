@@ -3,7 +3,7 @@ import {Zen_Antique} from "@next/font/google";
 
 import styles from "./Index.module.scss";
 
-const zenAntique = Zen_Antique({weight: '400', subsets: ['japanese']});
+const zenAntique = Zen_Antique({weight: '400', subsets: ['japanese'], display: 'swap'});
 
 export default function Index() {
     return (
