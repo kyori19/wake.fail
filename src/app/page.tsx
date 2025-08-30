@@ -1,4 +1,24 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
 export default function Home() {
+  const [progress, setProgress] = useState(47);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        // Asymptotic approach to 100% - gets slower as it approaches 100
+        // This ensures it never actually reaches 100%
+        const remaining = 100 - prev;
+        const increment = remaining * 0.002; // Very small increment that gets smaller over time
+        return prev + increment;
+      });
+    }, 50); // Update every 50ms for smooth animation
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-8">
       <main className="flex flex-col items-center space-y-8 max-w-md w-full">
@@ -9,8 +29,8 @@ export default function Home() {
         <div className="w-full space-y-4">
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
             <div 
-              className="bg-blue-500 h-4 rounded-full transition-all duration-1000 ease-out"
-              style={{ width: '47%' }}
+              className="bg-blue-500 h-4 rounded-full transition-all duration-100 ease-out"
+              style={{ width: `${progress}%` }}
             />
           </div>
           
