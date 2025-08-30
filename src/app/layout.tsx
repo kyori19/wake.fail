@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "wake.fail - Loading...",
-  description: "A site that perpetually fails to wake up. A meta joke about endless loading screens.",
+  description: "Advanced system initialization and startup management platform",
 };
 
 export default function RootLayout({
