@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import type { TimePeriod } from '../lib/types';
 
 interface ProgressDisplayProps {
@@ -36,11 +37,14 @@ export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondar
   return (
     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
       <div 
-        className={`h-4 rounded-full transition-all duration-100 ease-out ${
-          timePeriod === 'fridayAfternoon' ? 'bg-green-500' :
-          timePeriod === 'mondayMorning' ? 'bg-red-400' :
-          'bg-blue-500'
-        }`}
+        className={clsx(
+          'h-4 rounded-full transition-all duration-100 ease-out',
+          {
+            'bg-green-500': timePeriod === 'fridayAfternoon',
+            'bg-red-400': timePeriod === 'mondayMorning',
+            'bg-blue-500': timePeriod !== 'fridayAfternoon' && timePeriod !== 'mondayMorning'
+          }
+        )}
         style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
       />
     </div>

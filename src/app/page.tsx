@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { useProgressStateWithDemo } from '../hooks/useProgressState';
 import { ProgressDisplay } from '../components/ProgressDisplay';
 import { MessageDisplay } from '../components/MessageDisplay';
@@ -17,9 +18,12 @@ export default function Home() {
   } = useProgressStateWithDemo();
 
   return (
-    <div className={`min-h-screen flex flex-col items-center justify-center p-8 ${
-      timePeriod === 'lateNight' ? 'bg-gray-900 text-gray-100' : 'bg-background text-foreground'
-    }`}>
+    <div className={clsx(
+      'min-h-screen flex flex-col items-center justify-center p-8',
+      timePeriod === 'lateNight' 
+        ? 'bg-gray-900 text-gray-100' 
+        : 'bg-background text-foreground'
+    )}>
       <DemoControls 
         onTimePeriodChange={setDemoTimePeriod}
         currentPeriod={timePeriod}

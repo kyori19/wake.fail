@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import type { TimePeriod } from '../lib/types';
 
 interface LoadingSpinnerProps {
@@ -12,10 +13,13 @@ export const LoadingSpinner = ({ timePeriod }: LoadingSpinnerProps) => {
   }
 
   return (
-    <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${
-      timePeriod === 'fridayAfternoon' ? 'border-green-500' :
-      timePeriod === 'mondayMorning' ? 'border-red-500' :
-      'border-blue-500'
-    }`}></div>
+    <div className={clsx(
+      'animate-spin rounded-full h-8 w-8 border-b-2',
+      {
+        'border-green-500': timePeriod === 'fridayAfternoon',
+        'border-red-500': timePeriod === 'mondayMorning',
+        'border-blue-500': timePeriod !== 'fridayAfternoon' && timePeriod !== 'mondayMorning'
+      }
+    )}></div>
   );
 };
