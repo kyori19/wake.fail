@@ -15,4 +15,10 @@ export interface ProgressState {
   showSecondary: boolean;
   isComplete: boolean;
   setTimePeriod?: (period: TimePeriod) => void;
+  // Interactive features
+  isInteractive: boolean;
+  isCursorIdle: boolean;
+  isLayoutBroken: boolean;
+  clickCount: number;
+  handleProgressClick?: () => void;
 }
