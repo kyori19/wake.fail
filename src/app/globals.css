@@ -3,6 +3,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --progress-bg: #e5e7eb;
+  --progress-fill: #3b82f6;
+  --text-muted: #6b7280;
 }
 
 @theme inline {
@@ -16,6 +19,9 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --progress-bg: #374151;
+    --progress-fill: #3b82f6;
+    --text-muted: #9ca3af;
   }
 }
 
