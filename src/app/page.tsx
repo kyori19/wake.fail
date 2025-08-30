@@ -14,23 +14,41 @@ export default function Home() {
     message, 
     showSecondary, 
     isComplete,
-    setDemoTimePeriod 
+    setDemoTimePeriod,
+    isInteractive,
+    isCursorIdle,
+    isLayoutBroken,
+    handleProgressClick,
   } = useProgressStateWithDemo();
 
   return (
     <div className={clsx(
       'min-h-screen flex flex-col items-center justify-center p-8',
-      timePeriod === 'lateNight' 
-        ? 'bg-gray-900 text-gray-100' 
-        : 'bg-background text-foreground'
+      {
+        'bg-gray-900 text-gray-100': timePeriod === 'lateNight',
+        'bg-background text-foreground': timePeriod !== 'lateNight',
+        // Layout breakage effects
+        'transform -rotate-1': isLayoutBroken,
+        'transition-transform duration-1000': isLayoutBroken,
+      }
     )}>
       <DemoControls 
         onTimePeriodChange={setDemoTimePeriod}
         currentPeriod={timePeriod}
       />
       
-      <main className="flex flex-col items-center space-y-8 max-w-md w-full">
-        <h1 className="text-2xl font-mono text-center">
+      <main className={clsx(
+        "flex flex-col items-center space-y-8 max-w-md w-full",
+        {
+          "animate-pulse": isLayoutBroken,
+        }
+      )}>
+        <h1 className={clsx(
+          "text-2xl font-mono text-center",
+          {
+            "animate-bounce": isLayoutBroken,
+          }
+        )}>
           wake.fail
         </h1>
         
@@ -40,6 +58,9 @@ export default function Home() {
             progress={progress}
             isComplete={isComplete}
             showSecondary={showSecondary}
+            onClick={handleProgressClick}
+            isInteractive={isInteractive}
+            isLayoutBroken={isLayoutBroken}
           />
           
           <MessageDisplay 
@@ -48,7 +69,11 @@ export default function Home() {
           />
         </div>
         
-        <LoadingSpinner timePeriod={timePeriod} />
+        <LoadingSpinner 
+          timePeriod={timePeriod} 
+          isCursorIdle={isCursorIdle}
+          isLayoutBroken={isLayoutBroken}
+        />
       </main>
     </div>
   );

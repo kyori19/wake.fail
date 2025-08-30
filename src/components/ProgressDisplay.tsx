@@ -8,9 +8,12 @@ interface ProgressDisplayProps {
   progress: number;
   isComplete: boolean;
   showSecondary: boolean;
+  onClick?: () => void;
+  isInteractive?: boolean;
+  isLayoutBroken?: boolean;
 }
 
-export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondary }: ProgressDisplayProps) => {
+export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondary, onClick, isInteractive, isLayoutBroken }: ProgressDisplayProps) => {
   if (timePeriod === 'lateNight') {
     // Special late night display with pulsing zZz
     return (
@@ -35,14 +38,26 @@ export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondar
 
   // Regular progress bar
   return (
-    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
+    <div 
+      className={clsx(
+        "w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden",
+        {
+          "cursor-pointer": isInteractive,
+          "transform rotate-1 scale-110": isLayoutBroken,
+          "transition-all duration-1000": isLayoutBroken
+        }
+      )}
+      onClick={onClick}
+      title={isInteractive ? "Click to help wake up the system!" : undefined}
+    >
       <div 
         className={clsx(
           'h-4 rounded-full transition-all duration-100 ease-out',
           {
             'bg-green-500': timePeriod === 'fridayAfternoon',
             'bg-red-400': timePeriod === 'mondayMorning',
-            'bg-blue-500': timePeriod !== 'fridayAfternoon' && timePeriod !== 'mondayMorning'
+            'bg-blue-500': timePeriod !== 'fridayAfternoon' && timePeriod !== 'mondayMorning',
+            'animate-pulse': isLayoutBroken,
           }
         )}
         style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
