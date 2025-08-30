@@ -1,45 +1,54 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import clsx from 'clsx';
+import { useProgressStateWithDemo } from '../hooks/useProgressState';
+import { ProgressDisplay } from '../components/ProgressDisplay';
+import { MessageDisplay } from '../components/MessageDisplay';
+import { LoadingSpinner } from '../components/LoadingSpinner';
+import { DemoControls } from '../components/DemoControls';
 
 export default function Home() {
-  const [progress, setProgress] = useState(47);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        // Asymptotic approach to 100% - gets slower as it approaches 100
-        // This ensures it never actually reaches 100%
-        const remaining = 100 - prev;
-        const increment = remaining * 0.002; // Very small increment that gets smaller over time
-        return prev + increment;
-      });
-    }, 50); // Update every 50ms for smooth animation
-
-    return () => clearInterval(interval);
-  }, []);
+  const { 
+    timePeriod, 
+    progress, 
+    message, 
+    showSecondary, 
+    isComplete,
+    setDemoTimePeriod 
+  } = useProgressStateWithDemo();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-8">
+    <div className={clsx(
+      'min-h-screen flex flex-col items-center justify-center p-8',
+      timePeriod === 'lateNight' 
+        ? 'bg-gray-900 text-gray-100' 
+        : 'bg-background text-foreground'
+    )}>
+      <DemoControls 
+        onTimePeriodChange={setDemoTimePeriod}
+        currentPeriod={timePeriod}
+      />
+      
       <main className="flex flex-col items-center space-y-8 max-w-md w-full">
         <h1 className="text-2xl font-mono text-center">
           wake.fail
         </h1>
         
         <div className="w-full space-y-4">
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
-            <div 
-              className="bg-blue-500 h-4 rounded-full transition-all duration-100 ease-out"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+          <ProgressDisplay 
+            timePeriod={timePeriod}
+            progress={progress}
+            isComplete={isComplete}
+            showSecondary={showSecondary}
+          />
           
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400 font-mono">
-            Loading...
-          </p>
+          <MessageDisplay 
+            timePeriod={timePeriod}
+            message={message}
+          />
         </div>
         
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+        <LoadingSpinner timePeriod={timePeriod} />
       </main>
     </div>
   );
