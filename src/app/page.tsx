@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { useProgressStateWithDemo } from '../hooks/useProgressState';
+import { useConsoleGimmicks } from '../hooks/useConsoleGimmicks';
 import { ProgressDisplay } from '../components/ProgressDisplay';
 import { MessageDisplay } from '../components/MessageDisplay';
 import { LoadingSpinner } from '../components/LoadingSpinner';
@@ -20,6 +21,9 @@ export default function Home() {
     isLayoutBroken,
     handleProgressClick,
   } = useProgressStateWithDemo();
+
+  // Initialize console gimmicks
+  useConsoleGimmicks(timePeriod);
 
   return (
     <div className={clsx(
