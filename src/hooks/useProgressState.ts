@@ -185,6 +185,7 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
     message,
     showSecondary,
     isComplete,
+    theme: progressConfig.theme || 'macOS', // Default fallback theme
     setTimePeriod, // Export setter for demo controls
     isInteractive,
     isCursorIdle,
