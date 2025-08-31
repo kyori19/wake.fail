@@ -5,6 +5,7 @@ This directory contains end-to-end tests for the wake.fail application using [Pl
 ## Test Suites
 
 ### Basic Functionality (`basic-functionality.spec.ts`)
+
 - Page loads without errors
 - Progress bar is visible and animates
 - Messages are displayed and update
@@ -12,6 +13,7 @@ This directory contains end-to-end tests for the wake.fail application using [Pl
 - Page is responsive and handles window resize
 
 ### Demo Controls & Time Periods (`demo-controls.spec.ts`)
+
 - Demo controls can be toggled with keyboard shortcut (Ctrl+Shift+D)
 - Demo controls are visible with URL parameter (?demo=true)
 - Can switch between different time periods
@@ -21,6 +23,7 @@ This directory contains end-to-end tests for the wake.fail application using [Pl
 - Monday morning shows specific behavior
 
 ### Console Functionality (`console-functionality.spec.ts`)
+
 - Console fake functions are available
 - help() function works correctly
 - wake.up() function works correctly (returns false as deprecated)
@@ -31,6 +34,7 @@ This directory contains end-to-end tests for the wake.fail application using [Pl
 - panic() function works if available
 
 ### Interactive Features (`interactive-features.spec.ts`)
+
 - Progress bar responds to clicks
 - Cursor idle detection works
 - Window resize triggers layout effects
@@ -66,6 +70,7 @@ npx playwright test --project webkit
 ## Test Configuration
 
 Tests are configured in `playwright.config.ts` and include:
+
 - Cross-browser testing (Chromium, Firefox, WebKit)
 - Mobile browser testing (Chrome Mobile, Safari Mobile)
 - Automatic dev server startup
@@ -75,6 +80,7 @@ Tests are configured in `playwright.config.ts` and include:
 ## Adding New Tests
 
 When adding new tests:
+
 1. Follow the existing pattern of test organization
 2. Use descriptive test names that match the manual testing checklist
 3. Use data-testid attributes for reliable element selection
