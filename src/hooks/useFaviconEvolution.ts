@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 const FAVICON_STAGES = ['😊', '😐', '😒', '😴'] as const;
-const STAGE_DURATION = 30000; // 30 seconds per stage for testing, could be longer in production
+const STAGE_DURATION = 10000; // 10 seconds per stage for better demo experience
 
 /**
  * Hook to manage evolving favicon that changes over time
