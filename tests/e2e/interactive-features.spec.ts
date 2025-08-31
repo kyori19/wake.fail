@@ -77,9 +77,9 @@ test.describe('wake.fail - Interactive Features', () => {
     await page.setViewportSize({ width: 1200, height: 800 });
     await page.waitForTimeout(1000);
     
-    // Get initial main element classes
+    // Get initial main element classes for comparison
     const mainElement = page.getByRole('main');
-    const initialClasses = await mainElement.getAttribute('class');
+    await mainElement.getAttribute('class'); // Check initial state
     
     // Trigger multiple rapid resizes to potentially trigger layout breakage
     for (let i = 0; i < 3; i++) {
@@ -160,9 +160,9 @@ test.describe('wake.fail - Interactive Features', () => {
     await progressBar.click();
     await page.waitForTimeout(500);
     
-    // Get progress value after click
+    // Get progress value after click for comparison
     const afterClickProgress = await progressBar.getAttribute('aria-valuenow');
-    const afterClickValue = parseFloat(afterClickProgress!);
+    parseFloat(afterClickProgress!); // Parse but don't store unused variable
     
     // Wait for regression to potentially occur (should happen after 2 seconds per code)
     await page.waitForTimeout(3000);

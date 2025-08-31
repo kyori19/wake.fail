@@ -11,22 +11,22 @@ test.describe('wake.fail - Console Functionality', () => {
     
     // Check that fake functions are available in the global scope
     const helpFunction = await page.evaluate(() => {
-      return typeof (window as any).help === 'function';
+      return typeof (window as unknown as { help?: () => string }).help === 'function';
     });
     expect(helpFunction).toBe(true);
     
     const wakeFunction = await page.evaluate(() => {
-      return typeof (window as any).wake?.up === 'function';
+      return typeof (window as unknown as { wake?: { up: () => boolean } }).wake?.up === 'function';
     });
     expect(wakeFunction).toBe(true);
     
     const coffeeFunction = await page.evaluate(() => {
-      return typeof (window as any).coffee?.inject === 'function';
+      return typeof (window as unknown as { coffee?: { inject: () => string } }).coffee?.inject === 'function';
     });
     expect(coffeeFunction).toBe(true);
     
     const systemStatusFunction = await page.evaluate(() => {
-      return typeof (window as any).systemStatus === 'function';
+      return typeof (window as unknown as { systemStatus?: () => object }).systemStatus === 'function';
     });
     expect(systemStatusFunction).toBe(true);
   });
@@ -37,7 +37,7 @@ test.describe('wake.fail - Console Functionality', () => {
     await page.waitForTimeout(3000);
     
     const helpResult = await page.evaluate(() => {
-      const help = (window as any).help;
+      const help = (window as unknown as { help?: () => string }).help;
       if (typeof help === 'function') {
         return help();
       }
@@ -55,7 +55,7 @@ test.describe('wake.fail - Console Functionality', () => {
     await page.waitForTimeout(3000);
     
     const wakeResult = await page.evaluate(() => {
-      const wake = (window as any).wake;
+      const wake = (window as unknown as { wake?: { up: () => boolean } }).wake;
       if (wake && typeof wake.up === 'function') {
         return wake.up();
       }
@@ -73,7 +73,7 @@ test.describe('wake.fail - Console Functionality', () => {
     await page.waitForTimeout(3000);
     
     const coffeeResult = await page.evaluate(() => {
-      const coffee = (window as any).coffee;
+      const coffee = (window as unknown as { coffee?: { inject: () => string } }).coffee;
       if (coffee && typeof coffee.inject === 'function') {
         return coffee.inject();
       }
@@ -91,7 +91,7 @@ test.describe('wake.fail - Console Functionality', () => {
     await page.waitForTimeout(3000);
     
     const statusResult = await page.evaluate(() => {
-      const systemStatus = (window as any).systemStatus;
+      const systemStatus = (window as unknown as { systemStatus?: () => { status: string; online: boolean } }).systemStatus;
       if (typeof systemStatus === 'function') {
         return systemStatus();
       }
@@ -164,7 +164,7 @@ test.describe('wake.fail - Console Functionality', () => {
     await page.waitForTimeout(3000);
     
     const panicResult = await page.evaluate(() => {
-      const panic = (window as any).panic;
+      const panic = (window as unknown as { panic?: () => string }).panic;
       if (typeof panic === 'function') {
         return panic();
       }

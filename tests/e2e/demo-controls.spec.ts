@@ -81,10 +81,6 @@ test.describe('wake.fail - Demo Controls & Time Periods', () => {
     // Wait for theme change
     await page.waitForTimeout(500);
     
-    // Check that dark theme is applied
-    const body = page.locator('body');
-    const mainDiv = page.locator('div').first();
-    
     // Check for dark background classes or styles
     const hasNightClasses = await page.evaluate(() => {
       const elements = document.querySelectorAll('*');
