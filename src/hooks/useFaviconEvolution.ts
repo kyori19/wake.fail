@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const FAVICON_STAGES = ['😊', '😐', '😒', '😴'] as const;
 const STAGE_DURATION = 10000; // 10 seconds per stage for better demo experience
@@ -30,7 +30,7 @@ export const useFaviconEvolution = () => {
   };
 
   // Update favicon in document head
-  const updateFavicon = (emoji: string) => {
+  const updateFavicon = useCallback((emoji: string) => {
     if (typeof window === 'undefined') return;
     
     // Remove existing favicon
@@ -45,12 +45,12 @@ export const useFaviconEvolution = () => {
     link.type = 'image/x-icon';
     link.href = createEmojiDataUrl(emoji);
     document.head.appendChild(link);
-  };
+  }, []);
 
   // Initialize favicon immediately
   useEffect(() => {
     updateFavicon(FAVICON_STAGES[0]);
-  }, []);
+  }, [updateFavicon]);
 
   // Evolution effect
   useEffect(() => {
@@ -64,7 +64,7 @@ export const useFaviconEvolution = () => {
     }, STAGE_DURATION);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [updateFavicon]);
 
   return {
     currentStage,
