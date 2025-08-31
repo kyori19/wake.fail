@@ -81,6 +81,11 @@ export const ProgressDisplay = ({
             clickRipple && isInteractive,
         }
       )}
+      role="progressbar"
+      aria-valuenow={Math.round(progress)}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label={`Loading progress: ${Math.round(progress)}%`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
