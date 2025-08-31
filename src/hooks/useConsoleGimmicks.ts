@@ -111,7 +111,7 @@ const addFakeFunctionsToGlobal = () => {
     console.log('%c  systemStatus()  - Check current system status', 'color: #96ceb4;');
     console.log('%c  ascii()         - Display random ASCII art', 'color: #96ceb4;');
     console.log('%c  panic()         - Emergency protocols', 'color: #96ceb4;');
-    console.log('\n%c💡 Pro tip: These functions are just for fun!', 'color: #ffd93d; font-style: italic;');
+    console.log('\n%c💡 Pro tip: Use these commands to monitor and control system state.', 'color: #ffd93d; font-style: italic;');
     return '// TODO: Implement help function';
   };
 
