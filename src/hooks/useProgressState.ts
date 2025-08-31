@@ -8,14 +8,22 @@ import { getProgressConfig } from '../lib/progress-config';
 /**
  * Hook for managing progress state and animations
  */
-export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState => {
-  const [timePeriod, setTimePeriod] = useState<TimePeriod>(() => overrideTimePeriod || getTimePeriod());
-  const [progressConfig, setProgressConfig] = useState(() => getProgressConfig(timePeriod));
+export const useProgressState = (
+  overrideTimePeriod?: TimePeriod
+): ProgressState => {
+  const [timePeriod, setTimePeriod] = useState<TimePeriod>(
+    () => overrideTimePeriod || getTimePeriod()
+  );
+  const [progressConfig, setProgressConfig] = useState(() =>
+    getProgressConfig(timePeriod)
+  );
   const [progress, setProgress] = useState(progressConfig.initialProgress);
   const [message, setMessage] = useState(progressConfig.message);
   const [showSecondary, setShowSecondary] = useState(false);
-  const [isComplete, setIsComplete] = useState(timePeriod === 'aprilFools' && progressConfig.initialProgress === 100);
-  
+  const [isComplete, setIsComplete] = useState(
+    timePeriod === 'aprilFools' && progressConfig.initialProgress === 100
+  );
+
   // Interactive features state
   const [isInteractive, setIsInteractive] = useState(false);
   const [isCursorIdle, setIsCursorIdle] = useState(false);
@@ -38,7 +46,9 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
     setProgress(newConfig.initialProgress);
     setMessage(newConfig.message);
     setShowSecondary(false);
-    setIsComplete(timePeriod === 'aprilFools' && newConfig.initialProgress === 100);
+    setIsComplete(
+      timePeriod === 'aprilFools' && newConfig.initialProgress === 100
+    );
   }, [timePeriod]);
 
   // Interactive features setup
@@ -58,10 +68,17 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
     // Window resize tracking for responsive breakage
     const handleResize = () => {
       setIsLayoutBroken(true);
-      console.error('🚨 CRITICAL ERROR: Window resize detected! Layout integrity compromised!');
-      console.warn('📐 Dimensions unstable: Expected 1024x768, got ' + window.innerWidth + 'x' + window.innerHeight);
+      console.error(
+        '🚨 CRITICAL ERROR: Window resize detected! Layout integrity compromised!'
+      );
+      console.warn(
+        '📐 Dimensions unstable: Expected 1024x768, got ' +
+          window.innerWidth +
+          'x' +
+          window.innerHeight
+      );
       console.log('🔧 Attempting to restore... please stand by...');
-      
+
       // Restore after a moment for the gag
       setTimeout(() => {
         setIsLayoutBroken(false);
@@ -83,7 +100,8 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
   useEffect(() => {
     const idleTimer = setInterval(() => {
       const now = Date.now();
-      if (now - lastMouseMoveTime > 5000) { // 5 seconds of no movement
+      if (now - lastMouseMoveTime > 5000) {
+        // 5 seconds of no movement
         setIsCursorIdle(true);
       }
     }, 1000);
@@ -97,8 +115,11 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
 
     const regressionTimer = setInterval(() => {
       const now = Date.now();
-      if (now - lastClickTime > 2000) { // 2 seconds since last click
-        setProgress(prev => Math.max(progressConfig.initialProgress, prev - 0.5));
+      if (now - lastClickTime > 2000) {
+        // 2 seconds since last click
+        setProgress(prev =>
+          Math.max(progressConfig.initialProgress, prev - 0.5)
+        );
       }
     }, 100);
 
@@ -139,7 +160,10 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
           }
 
           // Handle Friday afternoon freeze
-          if ((timePeriod as TimePeriod) === 'fridayAfternoon' && prev >= 99.9) {
+          if (
+            (timePeriod as TimePeriod) === 'fridayAfternoon' &&
+            prev >= 99.9
+          ) {
             return 99.9; // Freeze at 99.9%
           }
 
@@ -157,18 +181,18 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
   // Click handler for progress
   const handleProgressClick = () => {
     if (!isInteractive) return;
-    
+
     setClickCount(prev => prev + 1);
     setLastClickTime(Date.now());
     setProgress(prev => Math.min(100, prev + 2 + Math.random() * 3)); // Random nudge between 2-5%
-    
+
     // Update message based on click count
     if (clickCount < 5) {
       setMessage('Good! Keep clicking! 🖱️');
     } else if (clickCount < 10) {
-      setMessage('You\'re getting the hang of it! 💪');
+      setMessage("You're getting the hang of it! 💪");
     } else {
-      setMessage('Wow, you\'re really dedicated! 🎉');
+      setMessage("Wow, you're really dedicated! 🎉");
     }
   };
 
@@ -197,8 +221,11 @@ export const useProgressState = (overrideTimePeriod?: TimePeriod): ProgressState
 
 // Export a version with demo controls support
 export const useProgressStateWithDemo = () => {
-  const [demoTimePeriod, setDemoTimePeriod] = useState<TimePeriod | 'auto'>('auto');
-  const actualTimePeriod = demoTimePeriod === 'auto' ? undefined : demoTimePeriod;
+  const [demoTimePeriod, setDemoTimePeriod] = useState<TimePeriod | 'auto'>(
+    'auto'
+  );
+  const actualTimePeriod =
+    demoTimePeriod === 'auto' ? undefined : demoTimePeriod;
   const progressState = useProgressState(actualTimePeriod);
 
   return {

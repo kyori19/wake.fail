@@ -1,4 +1,9 @@
-export type TimePeriod = 'normal' | 'mondayMorning' | 'fridayAfternoon' | 'lateNight' | 'aprilFools';
+export type TimePeriod =
+  | 'normal'
+  | 'mondayMorning'
+  | 'fridayAfternoon'
+  | 'lateNight'
+  | 'aprilFools';
 
 export type ProgressTheme = 'windowsXP' | 'macOS' | 'retro' | 'windows98';
 

@@ -16,7 +16,16 @@ interface ProgressDisplayProps {
   isLayoutBroken?: boolean;
 }
 
-export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondary, theme, onClick, isInteractive, isLayoutBroken }: ProgressDisplayProps) => {
+export const ProgressDisplay = ({
+  timePeriod,
+  progress,
+  isComplete,
+  showSecondary,
+  theme,
+  onClick,
+  isInteractive,
+  isLayoutBroken,
+}: ProgressDisplayProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [clickRipple, setClickRipple] = useState(false);
 
@@ -52,30 +61,32 @@ export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondar
 
   // Regular progress bar
   const themeClasses = getThemeClasses(theme, isComplete);
-  
+
   return (
-    <div 
+    <div
       className={clsx(
-        "w-full overflow-hidden relative transition-all duration-300 ease-in-out",
+        'w-full overflow-hidden relative transition-all duration-300 ease-in-out',
         themeClasses.container,
         themeClasses.height,
         {
-          "cursor-pointer": isInteractive,
-          "transform rotate-1 scale-110": isLayoutBroken,
-          "transition-all duration-1000": isLayoutBroken,
+          'cursor-pointer': isInteractive,
+          'transform rotate-1 scale-110': isLayoutBroken,
+          'transition-all duration-1000': isLayoutBroken,
           // Hover effects for interactive progress bars
-          "hover:shadow-md hover:scale-[1.02]": isInteractive && !isLayoutBroken,
-          "active:scale-[0.98]": isInteractive && !isLayoutBroken,
+          'hover:shadow-md hover:scale-[1.02]':
+            isInteractive && !isLayoutBroken,
+          'active:scale-[0.98]': isInteractive && !isLayoutBroken,
           // Click ripple effect
-          "after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-20 after:animate-pulse": clickRipple && isInteractive,
+          "after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-20 after:animate-pulse":
+            clickRipple && isInteractive,
         }
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
-      title={isInteractive ? "Click to help wake up the system!" : undefined}
+      title={isInteractive ? 'Click to help wake up the system!' : undefined}
     >
-      <div 
+      <div
         className={clsx(
           'transition-all duration-500 ease-out relative overflow-hidden',
           themeClasses.bar,
@@ -88,21 +99,23 @@ export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondar
             'duration-700': !isLayoutBroken,
           }
         )}
-        style={{ 
+        style={{
           width: `${Math.min(100, Math.max(0, progress))}%`,
           // Add subtle glow on hover
-          ...(isHovered && isInteractive && !isLayoutBroken ? {
-            boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)'
-          } : {})
+          ...(isHovered && isInteractive && !isLayoutBroken
+            ? {
+                boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)',
+              }
+            : {}),
         }}
       >
         {/* Shimmer effect for visual polish */}
         {isInteractive && !isLayoutBroken && (
-          <div 
+          <div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-progress-shimmer"
-            style={{ 
+            style={{
               transform: isHovered ? 'translateX(-100%)' : 'translateX(100%)',
-              transition: 'transform 1s ease-in-out'
+              transition: 'transform 1s ease-in-out',
             }}
           />
         )}

@@ -38,7 +38,9 @@ The site playfully responds to user actions, turning frustration into a small ga
 A collection of easter eggs for those who open the developer tools (F12).
 
 #### Console Theater
+
 A timed script prints fake conversations between a sysadmin and a stubborn AI:
+
 ```
 [SYSTEM] Initializing wake sequence...
 [AI] Good morning! Attempting to establish connection...
@@ -50,6 +52,7 @@ A timed script prints fake conversations between a sysadmin and a stubborn AI:
 ```
 
 #### Interactive Console Functions
+
 The console includes several fake functions users can actually call:
 
 - **`help()`** - Returns `"// TODO: Implement help function"`
@@ -60,6 +63,7 @@ The console includes several fake functions users can actually call:
 - **`panic()`** - Shows fake emergency alerts then reveals it's just a joke
 
 #### ASCII Art
+
 Large ASCII art of words like `FAIL`, `SLEEPING`, `WAKE`, and `LOADING` displayed in random colors.
 
 ### 4. Visual Polish 🎨
@@ -67,14 +71,18 @@ Large ASCII art of words like `FAIL`, `SLEEPING`, `WAKE`, and `LOADING` displaye
 Subtle visual cues that enhance the experience without requiring complex assets.
 
 #### Evolving Favicon
+
 The page's favicon (browser tab icon) evolves over time:
+
 - 😊 (initial, happy)
-- 😐 (neutral after 10 seconds)  
+- 😐 (neutral after 10 seconds)
 - 😒 (annoyed after 20 seconds)
 - 😴 (sleeping after 30 seconds)
 
 #### Randomized Progress Bar Themes
+
 Each page reload randomly selects a different theme:
+
 - **Windows XP:** Blue gradient with XP-style borders
 - **macOS:** Sleek rounded progress bar with subtle shadows
 - **Retro:** Green-on-black terminal style with pulsing effects
@@ -83,7 +91,8 @@ Each page reload randomly selects a different theme:
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm, yarn, pnpm, or bun
 
 ### Installation
@@ -143,7 +152,7 @@ src/
 
 1. **Client-Side Only:** Everything runs in the browser - no server-side processing
 2. **Lightweight:** Minimal dependencies, optimized for fast loading
-3. **Responsive:** Works across different screen sizes and devices  
+3. **Responsive:** Works across different screen sizes and devices
 4. **Accessible:** Proper ARIA labels and semantic HTML
 5. **Performant:** Efficient timers and event handling to avoid battery drain
 
@@ -158,7 +167,7 @@ src/
 
 ```bash
 npm run dev      # Start development server with Turbopack
-npm run build    # Build for production  
+npm run build    # Build for production
 npm run start    # Start production server
 npm run lint     # Run ESLint
 ```
@@ -189,7 +198,7 @@ We welcome contributions! Here's how you can help:
 ### Types of Contributions
 
 - **New Time Periods:** Add behavior for holidays, seasons, or special dates
-- **Additional Themes:** Create new progress bar visual styles  
+- **Additional Themes:** Create new progress bar visual styles
 - **Console Gimmicks:** Add more interactive console functions or ASCII art
 - **Performance:** Optimize animations and reduce resource usage
 - **Accessibility:** Improve screen reader support and keyboard navigation
@@ -235,4 +244,4 @@ Created as a satirical commentary on modern web experiences. Inspired by every l
 
 ---
 
-*Remember: The best loading screen is the one that never finishes loading.* 🎯
+_Remember: The best loading screen is the one that never finishes loading._ 🎯
