@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { useProgressStateWithDemo } from '../hooks/useProgressState';
 import { useConsoleGimmicks } from '../hooks/useConsoleGimmicks';
+import { useFaviconEvolution } from '../hooks/useFaviconEvolution';
 import { ProgressDisplay } from '../components/ProgressDisplay';
 import { MessageDisplay } from '../components/MessageDisplay';
 import { LoadingSpinner } from '../components/LoadingSpinner';
@@ -15,6 +16,7 @@ export default function Home() {
     message, 
     showSecondary, 
     isComplete,
+    theme,
     setDemoTimePeriod,
     isInteractive,
     isCursorIdle,
@@ -24,6 +26,9 @@ export default function Home() {
 
   // Initialize console gimmicks
   useConsoleGimmicks(timePeriod);
+  
+  // Initialize favicon evolution
+  useFaviconEvolution();
 
   return (
     <div className={clsx(
@@ -62,6 +67,7 @@ export default function Home() {
             progress={progress}
             isComplete={isComplete}
             showSecondary={showSecondary}
+            theme={theme}
             onClick={handleProgressClick}
             isInteractive={isInteractive}
             isLayoutBroken={isLayoutBroken}

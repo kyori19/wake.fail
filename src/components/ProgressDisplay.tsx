@@ -1,19 +1,21 @@
 'use client';
 
 import clsx from 'clsx';
-import type { TimePeriod } from '../lib/types';
+import type { TimePeriod, ProgressTheme } from '../lib/types';
+import { getThemeClasses } from '../lib/theme-utils';
 
 interface ProgressDisplayProps {
   timePeriod: TimePeriod;
   progress: number;
   isComplete: boolean;
   showSecondary: boolean;
+  theme: ProgressTheme;
   onClick?: () => void;
   isInteractive?: boolean;
   isLayoutBroken?: boolean;
 }
 
-export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondary, onClick, isInteractive, isLayoutBroken }: ProgressDisplayProps) => {
+export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondary, theme, onClick, isInteractive, isLayoutBroken }: ProgressDisplayProps) => {
   if (timePeriod === 'lateNight') {
     // Special late night display with pulsing zZz
     return (
@@ -37,10 +39,14 @@ export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondar
   }
 
   // Regular progress bar
+  const themeClasses = getThemeClasses(theme, isComplete);
+  
   return (
     <div 
       className={clsx(
-        "w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden",
+        "w-full overflow-hidden",
+        themeClasses.container,
+        themeClasses.height,
         {
           "cursor-pointer": isInteractive,
           "transform rotate-1 scale-110": isLayoutBroken,
@@ -52,11 +58,10 @@ export const ProgressDisplay = ({ timePeriod, progress, isComplete, showSecondar
     >
       <div 
         className={clsx(
-          'h-4 rounded-full transition-all duration-100 ease-out',
+          'transition-all duration-100 ease-out',
+          themeClasses.bar,
+          themeClasses.height,
           {
-            'bg-green-500': timePeriod === 'fridayAfternoon',
-            'bg-red-400': timePeriod === 'mondayMorning',
-            'bg-blue-500': timePeriod !== 'fridayAfternoon' && timePeriod !== 'mondayMorning',
             'animate-pulse': isLayoutBroken,
           }
         )}
