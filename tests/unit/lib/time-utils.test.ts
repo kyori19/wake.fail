@@ -16,7 +16,7 @@ describe('time-utils', () => {
       mockDate.getDate = jest.fn(() => date);
       mockDate.getHours = jest.fn(() => hour);
       mockDate.getDay = jest.fn(() => day);
-      
+
       jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
       return mockDate;
     };

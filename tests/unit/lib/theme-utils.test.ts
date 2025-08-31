@@ -4,7 +4,12 @@ import { ProgressTheme } from '../../../src/lib/types';
 describe('theme-utils', () => {
   describe('getRandomTheme', () => {
     it('should return a valid theme', () => {
-      const validThemes: ProgressTheme[] = ['windowsXP', 'macOS', 'retro', 'windows98'];
+      const validThemes: ProgressTheme[] = [
+        'windowsXP',
+        'macOS',
+        'retro',
+        'windows98',
+      ];
       const theme = getRandomTheme();
       expect(validThemes).toContain(theme);
     });
@@ -40,7 +45,7 @@ describe('theme-utils', () => {
     it('should return different bar classes when complete for windowsXP', () => {
       const normalClasses = getThemeClasses('windowsXP', false);
       const completeClasses = getThemeClasses('windowsXP', true);
-      
+
       expect(normalClasses.bar).not.toBe(completeClasses.bar);
       expect(completeClasses.bar).toContain('green');
       expect(normalClasses.bar).toContain('blue');
@@ -76,16 +81,21 @@ describe('theme-utils', () => {
     });
 
     it('should handle isComplete parameter correctly for all themes', () => {
-      const themes: ProgressTheme[] = ['windowsXP', 'macOS', 'retro', 'windows98'];
-      
+      const themes: ProgressTheme[] = [
+        'windowsXP',
+        'macOS',
+        'retro',
+        'windows98',
+      ];
+
       themes.forEach(theme => {
         const normalClasses = getThemeClasses(theme, false);
         const completeClasses = getThemeClasses(theme, true);
-        
+
         // Container should be the same
         expect(normalClasses.container).toBe(completeClasses.container);
         expect(normalClasses.height).toBe(completeClasses.height);
-        
+
         // Bar classes should be different when complete
         expect(normalClasses.bar).not.toBe(completeClasses.bar);
         // Complete bars should contain green color
@@ -96,7 +106,7 @@ describe('theme-utils', () => {
     it('should default isComplete to false when not provided', () => {
       const defaultClasses = getThemeClasses('macOS');
       const explicitFalseClasses = getThemeClasses('macOS', false);
-      
+
       expect(defaultClasses).toEqual(explicitFalseClasses);
     });
   });

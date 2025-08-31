@@ -10,16 +10,18 @@ describe('progress-config', () => {
   describe('getProgressConfig', () => {
     it('should return configuration for mondayMorning period', () => {
       const config = getProgressConfig('mondayMorning');
-      
+
       expect(config.speed).toBe(0.0005);
       expect(config.initialProgress).toBe(5);
-      expect(config.message).toMatch(/Ugh, Monday|Need more coffee|Why is this taking so long/);
+      expect(config.message).toMatch(
+        /Ugh, Monday|Need more coffee|Why is this taking so long/
+      );
       expect(config.theme).toBe('macOS');
     });
 
     it('should return configuration for fridayAfternoon period', () => {
       const config = getProgressConfig('fridayAfternoon');
-      
+
       expect(config.speed).toBe(0.05);
       expect(config.initialProgress).toBe(95);
       expect(config.message).toBe('Almost weekend!');
@@ -29,7 +31,7 @@ describe('progress-config', () => {
 
     it('should return configuration for lateNight period', () => {
       const config = getProgressConfig('lateNight');
-      
+
       expect(config.speed).toBe(0.001);
       expect(config.initialProgress).toBe(20);
       expect(config.message).toBe('The server is sleeping. 😴');
@@ -39,7 +41,7 @@ describe('progress-config', () => {
 
     it('should return configuration for aprilFools period', () => {
       const config = getProgressConfig('aprilFools');
-      
+
       expect(config.speed).toBe(1);
       expect(config.initialProgress).toBe(100);
       expect(config.message).toBe('Hello World!');
@@ -49,7 +51,7 @@ describe('progress-config', () => {
 
     it('should return default configuration for normal period', () => {
       const config = getProgressConfig('normal');
-      
+
       expect(config.speed).toBe(0.002);
       expect(config.initialProgress).toBe(47);
       expect(config.message).toBe('Loading...');
@@ -60,7 +62,7 @@ describe('progress-config', () => {
 
     it('should return default configuration for unknown periods', () => {
       const config = getProgressConfig('unknown' as TimePeriod);
-      
+
       expect(config.speed).toBe(0.002);
       expect(config.initialProgress).toBe(47);
       expect(config.message).toBe('Loading...');
@@ -68,8 +70,14 @@ describe('progress-config', () => {
     });
 
     it('should always include a theme property', () => {
-      const periods: TimePeriod[] = ['normal', 'mondayMorning', 'fridayAfternoon', 'lateNight', 'aprilFools'];
-      
+      const periods: TimePeriod[] = [
+        'normal',
+        'mondayMorning',
+        'fridayAfternoon',
+        'lateNight',
+        'aprilFools',
+      ];
+
       periods.forEach(period => {
         const config = getProgressConfig(period);
         expect(config.theme).toBeDefined();
@@ -89,7 +97,7 @@ describe('progress-config', () => {
         mondayConfig.speed,
         fridayConfig.speed,
         lateNightConfig.speed,
-        aprilConfig.speed
+        aprilConfig.speed,
       ];
 
       // All speeds should be different
@@ -113,14 +121,24 @@ describe('progress-config', () => {
       });
 
       // Monday should start low, Friday should start high
-      expect(configs.mondayMorning.initialProgress).toBeLessThan(configs.normal.initialProgress);
-      expect(configs.fridayAfternoon.initialProgress).toBeGreaterThan(configs.normal.initialProgress);
+      expect(configs.mondayMorning.initialProgress).toBeLessThan(
+        configs.normal.initialProgress
+      );
+      expect(configs.fridayAfternoon.initialProgress).toBeGreaterThan(
+        configs.normal.initialProgress
+      );
       expect(configs.aprilFools.initialProgress).toBe(100);
     });
 
     it('should provide appropriate messages for each period', () => {
-      const periods: TimePeriod[] = ['normal', 'mondayMorning', 'fridayAfternoon', 'lateNight', 'aprilFools'];
-      
+      const periods: TimePeriod[] = [
+        'normal',
+        'mondayMorning',
+        'fridayAfternoon',
+        'lateNight',
+        'aprilFools',
+      ];
+
       periods.forEach(period => {
         const config = getProgressConfig(period);
         expect(config.message).toBeDefined();

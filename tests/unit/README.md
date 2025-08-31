@@ -7,7 +7,7 @@ This directory contains unit tests for the wake.fail application using [Jest](ht
 ```
 tests/unit/
 ├── lib/           # Tests for utility functions
-├── hooks/         # Tests for React hooks  
+├── hooks/         # Tests for React hooks
 ├── components/    # Tests for React components
 └── README.md      # This file
 ```
@@ -33,26 +33,31 @@ npm run test:e2e
 The unit tests focus on:
 
 ### Library Functions (`src/lib/`)
+
 - **time-utils.ts** - Time period detection logic
-- **theme-utils.ts** - Progress bar theme utilities  
+- **theme-utils.ts** - Progress bar theme utilities
 - **progress-config.ts** - Configuration for different time periods
 - **ascii-art.ts** - Console ASCII art utilities
 
 ### React Components (`src/components/`)
+
 - **LoadingSpinner.tsx** - Animated loading spinner component
 
 ### React Hooks (`src/hooks/`)
+
 - Complex hooks like `useProgressState` may need additional testing
 - DOM-heavy hooks like `useFaviconEvolution` are tested via E2E tests
 
 ## Writing Tests
 
 ### Test Organization
+
 - Place tests in the same directory structure as source files
 - Use descriptive test names that explain the expected behavior
 - Group related tests using `describe` blocks
 
 ### Testing Pure Functions
+
 ```typescript
 import { getTimePeriod } from '../../../src/lib/time-utils';
 
@@ -64,6 +69,7 @@ describe('getTimePeriod', () => {
 ```
 
 ### Testing React Components
+
 ```typescript
 import { render, screen } from '@testing-library/react';
 import { LoadingSpinner } from '../../../src/components/LoadingSpinner';
@@ -78,6 +84,7 @@ describe('LoadingSpinner', () => {
 ```
 
 ### Testing React Hooks
+
 ```typescript
 import { renderHook } from '@testing-library/react';
 import { useCustomHook } from '../../../src/hooks/useCustomHook';
@@ -112,6 +119,7 @@ describe('useCustomHook', () => {
 ## Mocking Strategies
 
 ### Time-based Tests
+
 ```typescript
 // Mock Date for predictable time-based tests
 const mockDate = (year, month, date, hour, day) => {
@@ -120,12 +128,14 @@ const mockDate = (year, month, date, hour, day) => {
 ```
 
 ### Console Tests
+
 ```typescript
 // Mock console methods
 const mockConsoleLog = jest.spyOn(console, 'log').mockImplementation();
 ```
 
 ### DOM APIs
+
 ```typescript
 // Mock DOM APIs not available in jsdom
 Object.defineProperty(window, 'matchMedia', {
@@ -136,6 +146,7 @@ Object.defineProperty(window, 'matchMedia', {
 ## Integration with E2E Tests
 
 Unit tests complement the existing E2E tests:
+
 - **Unit tests** verify individual functions and components in isolation
 - **E2E tests** verify complete user workflows and browser interactions
 - Both test suites run independently and serve different purposes

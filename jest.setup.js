@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -13,44 +13,44 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
   })),
-})
+});
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}
   observe() {
-    return null
+    return null;
   }
   disconnect() {
-    return null
+    return null;
   }
   unobserve() {
-    return null
+    return null;
   }
-}
+};
 
 // Mock ResizeObserver
 global.ResizeObserver = class ResizeObserver {
   constructor() {}
   observe() {
-    return null
+    return null;
   }
   disconnect() {
-    return null
+    return null;
   }
   unobserve() {
-    return null
+    return null;
   }
-}
+};
 
 // Mock console methods to avoid noise in tests
-const originalConsole = { ...console }
+const originalConsole = { ...console };
 beforeEach(() => {
   // Reset console mocks before each test
-  jest.clearAllMocks()
-})
+  jest.clearAllMocks();
+});
 
 afterAll(() => {
   // Restore original console after all tests
-  Object.assign(console, originalConsole)
-})
+  Object.assign(console, originalConsole);
+});
