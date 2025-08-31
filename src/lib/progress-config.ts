@@ -7,13 +7,17 @@ import { getRandomTheme } from './theme-utils';
 export const getProgressConfig = (period: TimePeriod): ProgressConfig => {
   // Get a random theme for this session
   const theme = getRandomTheme();
-  
+
   switch (period) {
     case 'mondayMorning':
       return {
         speed: 0.0005, // Very slow
         initialProgress: 5, // Start much lower
-        message: ['Ugh, Monday... 😩', 'Need more coffee. ☕️', 'Why is this taking so long?'][Math.floor(Math.random() * 3)],
+        message: [
+          'Ugh, Monday... 😩',
+          'Need more coffee. ☕️',
+          'Why is this taking so long?',
+        ][Math.floor(Math.random() * 3)],
         theme,
       };
     case 'fridayAfternoon':

@@ -10,7 +10,11 @@ interface LoadingSpinnerProps {
   isLayoutBroken?: boolean;
 }
 
-export const LoadingSpinner = ({ timePeriod, isCursorIdle, isLayoutBroken }: LoadingSpinnerProps) => {
+export const LoadingSpinner = ({
+  timePeriod,
+  isCursorIdle,
+  isLayoutBroken,
+}: LoadingSpinnerProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   if (timePeriod === 'lateNight') {
@@ -18,13 +22,17 @@ export const LoadingSpinner = ({ timePeriod, isCursorIdle, isLayoutBroken }: Loa
   }
 
   return (
-    <div 
+    <div
       className={clsx(
         'rounded-full h-8 w-8 border-b-2 transition-all duration-300 ease-in-out',
         {
-          'border-green-500': timePeriod === 'fridayAfternoon' && !isLayoutBroken,
-          'border-red-500': (timePeriod === 'mondayMorning' || isLayoutBroken),
-          'border-blue-500': timePeriod !== 'fridayAfternoon' && timePeriod !== 'mondayMorning' && !isLayoutBroken,
+          'border-green-500':
+            timePeriod === 'fridayAfternoon' && !isLayoutBroken,
+          'border-red-500': timePeriod === 'mondayMorning' || isLayoutBroken,
+          'border-blue-500':
+            timePeriod !== 'fridayAfternoon' &&
+            timePeriod !== 'mondayMorning' &&
+            !isLayoutBroken,
           // Only animate if cursor is NOT idle
           'animate-spin': !isCursorIdle && !isLayoutBroken,
           // Layout breakage effects
@@ -41,9 +49,11 @@ export const LoadingSpinner = ({ timePeriod, isCursorIdle, isLayoutBroken }: Loa
       onMouseLeave={() => setIsHovered(false)}
       style={{
         // Add subtle glow effect on hover
-        ...(isHovered && !isLayoutBroken ? {
-          filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.4))'
-        } : {})
+        ...(isHovered && !isLayoutBroken
+          ? {
+              filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.4))',
+            }
+          : {}),
       }}
     />
   );

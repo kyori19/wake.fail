@@ -8,9 +8,14 @@ interface DemoControlsProps {
   currentPeriod: TimePeriod;
 }
 
-export const DemoControls = ({ onTimePeriodChange, currentPeriod }: DemoControlsProps) => {
+export const DemoControls = ({
+  onTimePeriodChange,
+  currentPeriod,
+}: DemoControlsProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod | 'auto'>('auto');
+  const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod | 'auto'>(
+    'auto'
+  );
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -51,7 +56,9 @@ export const DemoControls = ({ onTimePeriodChange, currentPeriod }: DemoControls
 
   return (
     <div className="fixed top-4 left-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border border-gray-300 dark:border-gray-600 rounded-lg p-4 shadow-xl z-50 min-w-48 transition-all duration-300 ease-in-out animate-in slide-in-from-left-4 fade-in">
-      <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">Demo Controls</h3>
+      <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
+        Demo Controls
+      </h3>
       <div className="flex flex-wrap gap-2">
         {periods.map(({ value, label }) => (
           <button
@@ -68,7 +75,8 @@ export const DemoControls = ({ onTimePeriodChange, currentPeriod }: DemoControls
         ))}
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-        Current: <span className="font-mono font-semibold">{currentPeriod}</span>
+        Current:{' '}
+        <span className="font-mono font-semibold">{currentPeriod}</span>
       </p>
       <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
         Ctrl+Shift+D to toggle

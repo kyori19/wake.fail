@@ -18,23 +18,25 @@ export const useFaviconEvolution = () => {
     canvas.width = 32;
     canvas.height = 32;
     const ctx = canvas.getContext('2d');
-    
+
     if (ctx) {
       ctx.font = '28px serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(emoji, 16, 16);
     }
-    
+
     return canvas.toDataURL();
   };
 
   // Update favicon in document head
   const updateFavicon = useCallback((emoji: string) => {
     if (typeof window === 'undefined') return;
-    
+
     // Remove existing favicon
-    const existingFavicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
+    const existingFavicon = document.querySelector(
+      'link[rel="icon"]'
+    ) as HTMLLinkElement;
     if (existingFavicon) {
       existingFavicon.remove();
     }
