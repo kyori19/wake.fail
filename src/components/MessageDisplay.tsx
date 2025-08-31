@@ -31,6 +31,7 @@ export const MessageDisplay = ({
   return (
     <div className="min-h-[1.5rem] flex items-center justify-center">
       <p
+        data-testid="message-display"
         className={clsx(
           'text-center text-sm font-mono transition-all duration-300 ease-in-out',
           {

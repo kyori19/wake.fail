@@ -23,6 +23,7 @@ export const LoadingSpinner = ({
 
   return (
     <div
+      data-testid="loading-spinner"
       className={clsx(
         'rounded-full h-8 w-8 border-b-2 transition-all duration-300 ease-in-out',
         {
