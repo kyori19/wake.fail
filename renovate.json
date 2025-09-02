@@ -1,0 +1,61 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":automergeMinor",
+    "schedule:weekends"
+  ],
+  "timezone": "UTC",
+  "labels": ["dependencies"],
+  "assignees": ["kyori19"],
+  "reviewers": ["kyori19"],
+  "packageRules": [
+    {
+      "groupName": "Next.js",
+      "matchPackageNames": ["next"],
+      "matchPackagePatterns": ["^@next/"]
+    },
+    {
+      "groupName": "React",
+      "matchPackageNames": ["react", "react-dom"],
+      "matchPackagePatterns": ["^@types/react"]
+    },
+    {
+      "groupName": "Testing Libraries",
+      "matchPackagePatterns": [
+        "^@testing-library/",
+        "^@playwright/",
+        "^jest",
+        "^@jest/"
+      ]
+    },
+    {
+      "groupName": "ESLint and Prettier",
+      "matchPackageNames": ["eslint", "prettier"],
+      "matchPackagePatterns": ["^eslint-", "^@eslint/", "^prettier"]
+    },
+    {
+      "groupName": "TypeScript",
+      "matchPackageNames": ["typescript"],
+      "matchPackagePatterns": ["^@types/"]
+    },
+    {
+      "groupName": "Build Tools",
+      "matchPackageNames": ["tailwindcss", "postcss"],
+      "matchPackagePatterns": ["^@tailwindcss/"]
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true
+  },
+  "osvVulnerabilityAlerts": true,
+  "dependencyDashboardTitle": "🤖 Dependency Updates Dashboard",
+  "commitMessagePrefix": "chore(deps): ",
+  "branchPrefix": "renovate/",
+  "rangeStrategy": "bump",
+  "separateMinorPatch": true,
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5
+}
