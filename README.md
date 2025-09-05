@@ -170,7 +170,37 @@ npm run dev      # Start development server with Turbopack
 npm run build    # Build for production
 npm run start    # Start production server
 npm run lint     # Run ESLint
+npm run format   # Format code with Prettier
+npm run format:check # Check code formatting
+npm test         # Run unit tests with Jest
+npm run test:watch # Run unit tests in watch mode
+npm run test:coverage # Run unit tests with coverage
+npm run test:e2e # Run end-to-end tests with Playwright
 ```
+
+### Continuous Integration
+
+The project uses GitHub Actions for automated testing and quality assurance:
+
+#### Code Quality Checks
+
+- **ESLint** for code linting
+- **TypeScript** type checking
+- **Prettier** code formatting verification
+
+#### Testing
+
+- **Unit Tests** with Jest and React Testing Library
+- **E2E Tests** with Playwright against Vercel Preview Deployments
+- **Coverage Reports** uploaded to Codecov
+
+#### Dependency Management
+
+- **Renovate** for automated dependency updates
+- Grouped updates by technology stack
+- Automatic security vulnerability alerts
+
+All checks must pass before merging to the main branch.
 
 ## 🎨 Customization
 
@@ -210,11 +240,18 @@ We welcome contributions! Here's how you can help:
 2. **Create a feature branch:** `git checkout -b feature/amazing-feature`
 3. **Make your changes** following the existing code style
 4. **Test thoroughly** across different browsers and time periods
-5. **Run linting:** `npm run lint`
+5. **Run quality checks:**
+   - `npm run lint` - ESLint checking
+   - `npm run format:check` - Code formatting
+   - `npx tsc --noEmit` - TypeScript type checking
+   - `npm test` - Unit tests
+   - `npm run test:e2e` - E2E tests (optional locally)
 6. **Build and test:** `npm run build && npm run start`
 7. **Commit your changes:** `git commit -m 'Add amazing feature'`
 8. **Push to your branch:** `git push origin feature/amazing-feature`
 9. **Open a Pull Request**
+
+**Note:** All CI checks (linting, type checking, formatting, and tests) must pass before your PR can be merged.
 
 ### Code Style Guidelines
 
